@@ -42,6 +42,7 @@ If you are not familiar with ROS, take a look a this [tutorials](http://wiki.ros
 Same goes for rosbridge and this [tutorial](http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge)!
 
 #### Front-end
+Clone this repository and run meteor:
 ```
 > git clone https://github.com/luisbosch/ros-turtlesim-meteor.git
 > cd ros-turtlesim-meteor
