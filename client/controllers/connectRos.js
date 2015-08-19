@@ -30,7 +30,15 @@ ros.on('close', function() {
   document.getElementById('closed').style.display = 'inline';
 });
 // Create a connection to the rosbridge WebSocket server.
-ros.connect('ws://localhost:9090');
+var connectionUrl = 'ws://localhost:9090';
+
+$.getJSON('config.json', function (config) {
+  if (config) {
+    connectionUrl = config.connectionUrl;
+  };
+  console.log(connectionUrl);
+  ros.connect(connectionUrl);  
+});
 
 /*
 * Configure connections to turtlesim Topics & Services
