@@ -42,4 +42,4 @@ The app connects to `ws://localhost:9090` by default.
 
 ## Contributors
 
-This is just a test, feel free to fork and use at your own risk!. ***This is repo is not maintained***
+This is just a test, feel free to fork and use at your own risk! ***This is repo is not maintained***.
