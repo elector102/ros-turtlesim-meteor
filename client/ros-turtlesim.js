@@ -40,7 +40,6 @@ draw = function (){
       var cmd = getControlVector(Number(cList[i].li),Number(cList[i].an));
       commands.push(cmd);
     };
-    console.log(commands)
     drawCommandList(commands);
   }
 };
