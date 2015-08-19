@@ -24,6 +24,7 @@ ros.on('connection', function() {
 ros.on('close', function() {
   console.log('Connection closed.');
   document.getElementById('turtlesim').style.display = 'none';
+  document.getElementById('turtlesim').style.display = 'none';
   document.getElementById('connecting').style.display = 'none';
   document.getElementById('connected').style.display = 'none';
   document.getElementById('closed').style.display = 'inline';

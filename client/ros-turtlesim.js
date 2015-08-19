@@ -4,6 +4,8 @@
 
 // read file upload
 window.onload = function() {
+  document.getElementById('turtlesim').style.display = 'none';
+  generateStarJSON();
   var fileList = document.getElementById('controlFile');
   var display = document.getElementById('fileDisplay');
 
@@ -29,7 +31,7 @@ window.onload = function() {
 draw = function (){
   var fileList = document.getElementById('controlFile');
   var display = document.getElementById('fileDisplay');
-  if (fileList.files.length !== 0){  
+  if (display.value !== "") {
     var json = JSON.parse(display.value);
     var cList = json.commands;
     var commands = [];
@@ -38,6 +40,7 @@ draw = function (){
       var cmd = getControlVector(Number(cList[i].li),Number(cList[i].an));
       commands.push(cmd);
     };
+    console.log(commands)
     drawCommandList(commands);
   }
 };
@@ -56,4 +59,21 @@ clean = function(){
   var display = document.getElementById('fileDisplay');
   display.value = "";
   fileList.value = "";
+};
+
+generateStarJSON = function(){
+  var display = document.getElementById('fileDisplay');
+  var star = { commands:[
+    {li : 2.5, an : 0.0},
+    {li : 0.0, an : 2.525},
+    {li : 2.5, an : 0.0},
+    {li : 0.0, an : 2.525},
+    {li : 2.5, an : 0.0},
+    {li : 0.0, an : 2.525},
+    {li : 2.5, an : 0.0},
+    {li : 0.0, an : 2.525},
+    {li : 2.5, an : 0.0},
+    {li : 0.0, an : 2.525}
+  ]};
+  display.value = JSON.stringify(star);
 };
