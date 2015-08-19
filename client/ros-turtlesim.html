@@ -3,23 +3,15 @@
 <meta charset="utf-8" />
 </head>
 
-<body>
-  <h1>Simple roslib Example</h1>
-  <p>Run the following commands in the terminal then refresh this page. Check the JavaScript
-    console for the output.</p>
-  <ol>
-    <li><tt>roscore</tt></li>
-    <li><tt>rostopic pub /listener std_msgs/String "Hello, World"</tt></li>
-    <li><tt>rostopic echo /cmd_vel</tt></li>
-    <li><tt>rosrun rospy_tutorials add_two_ints_server</tt></li>
-    <li><tt>roslaunch rosbridge_server rosbridge_websocket.launch</tt></li>
-  </ol>
+<body class="box rosapp">
+  <h1 class="page-title">Ros Turtlesim Challenge</h1>
+
   <div id="statusIndicator">
     <p id="connecting">
       Connecting to rosbridge...
     </p>
     <p id="connected" style="color:#00D600; display:none">
-      Connected
+      rosbridge status: Connected
     </p>
     <p id="error" style="color:#FF0000; display:none">
       Error in the backend!
@@ -28,12 +20,30 @@
       Connection closed.
     </p>
   </div>
-  <div>
-    <canvas id="turtle" width="300" height="300" style="border:3px solid #000000;background:#0000ff;">
-    </canvas>
-  </div>
-  <div>
+
+  <div id="turtlesim">
+    <h4>The control files must follow the next format:</h4>
+    <tt>JSON description here</tt>
+    <br>
+    <h4>Upload your control file:</h4>
+    <input type="file" id="controlFile"><button type="button" onclick="clean()">Clean command file</button>
+    
+    <br><br>
+
+    <textarea class="codebox" id="fileDisplay" rows="5" cols="50" value="" disabled>
+    </textarea>
+    
+    <br><br>
+
     <button type="button" onclick="reset()">Reset</button>
-    <button type="button" onclick="drawStar()">Draw</button>
+    <button type="button" onclick="draw()">Draw</button>
+
+    <br><br>
+    <div>
+      <canvas id="turtle" width="300" height="300" style="border:3px solid #000000;background:#0000ff;">
+      </canvas>
+    </div>
+    <div>
+    </div>
   </div>
 </body>
