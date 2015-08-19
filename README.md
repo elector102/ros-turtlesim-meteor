@@ -30,15 +30,16 @@ Dependencies for each environment are detailed below, with links for each instal
 > meteor
 ```
 
-The server to which roslib connects to can be configured in:
+The ***url*** and ***port*** of the server to which roslibjs connects to can be configured in:
 ```
 public\config.json
 ```
 ```json
 {
-  "connectionUrl": "ws://192.168.0.104:9090"
+  "connectionUrl": "ws://localhost:9090"
 }
 ```
+The app connects to `ws://localhost:9090` by default.
 
 ## Contributors
 
