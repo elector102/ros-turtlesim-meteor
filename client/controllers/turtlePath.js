@@ -31,7 +31,6 @@ turtle_pose.subscribe(function(message) {
 
 // draws in the canvas, according to turtlesim position
 drawTrutlePath = function (message) {
-  console.log("point!")
   var canvasSize = 300; // 300x300 in html
   var zoom = canvasSize / 12; // tutle sim is 12x12 in size
   var x = message.x * zoom;
