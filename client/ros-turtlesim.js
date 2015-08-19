@@ -1,20 +1,15 @@
-// if (Meteor.isClient) {
-//   // counter starts at 0
-//   Session.setDefault('counter', 0);
-
-//   Template.hello.helpers({
-//     counter: function () {
-//       return Session.get('counter');
-//     }
-//   });
-
-//   Template.hello.events({
-//     'click button': function () {
-//       // increment the counter when button is clicked
-//       Session.set('counter', Session.get('counter') + 1);
-//     }
-//   });
-// }
+/*
+* Main app controller
+*/
 
 // draw a star
 drawStar();
+
+// reset function
+reset = function (){
+  var canvas = document.getElementById("turtle");
+  var ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, 300, 300);
+  resetPosition();
+  turtlesimReset();
+}
