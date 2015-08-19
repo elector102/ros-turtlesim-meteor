@@ -2,19 +2,28 @@
 
 ## Synopsis
 
-This is a simple meteor app thats connects to a ROS Node running Turtlesim and draws the turtle's path as it moves. 
-The connection is done using ROSLibJS (on the client-side) and ros-hydro-rosbridge-server (on the server-side).
+This is a simple meteor app thats connects to a ROS Node running Turtlesim and draws a turtle's path as it moves. 
+The connection is done using roslibJS (on the client-side) and ros-hydro-rosbridge-server (on the server-side).
 
 ## Installation
+The app should be run on a machine with ***Ubuntu 14.04*** OS and the ***Meteor*** framework installed.
+
+The backend should be run on a machine with ***Ubuntu 14.04*** OS with ***ROS***, ***Turtlesim*** and the ***rosbridge_suite*** installed.
+
+Dependencies for each environment are detailed below, with links for each installation.
 
 ### Pre-requisites
 
-- [Ubuntu 14.4](http://www.ubuntu.com/download/)
+#### Back-end
+- [Ubuntu 14.04](http://www.ubuntu.com/download/)
 - [ROS (indigo)](http://wiki.ros.org/indigo/Installation/Ubuntu)
+- [Turtlesim](http://wiki.ros.org/turtlesim)
 - [rosbridge_suite](http://wiki.ros.org/rosbridge_suite)
+
+#### Front-end
 - [Meteor](https://www.meteor.com/install)
 
-### Installing and Running the app
+### Installing and running the app
 ```
 > git clone https://github.com/luisbosch/ros-turtlesim-meteor.git
 > cd ros-turtlesim-meteor
@@ -23,7 +32,12 @@ The connection is done using ROSLibJS (on the client-side) and ros-hydro-rosbrid
 
 The server to which roslib connects to can be configured in:
 ```
-client\config\config.json
+public\config.json
+```
+```json
+{
+  "connectionUrl": "ws://192.168.0.104:9090"
+}
 ```
 
 ## Contributors
