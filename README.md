@@ -26,9 +26,20 @@ Dependencies for each environment are detailed below, with links for each instal
 ### Installing and running the app
 #### Back-end
 Make sure you have ***roscore***, ***turtlesim*** and ***rosbridge*** running in the back-end.
+To do this, execute each of this commands in different terminals:
+```
+> roscore
+```
+```
+> rosrun turtlesim turtlesim_node
+```
+```
+> roslaunch rosbridge_server rosbridge_websocket.launch
+```
+You should now be ready to launch the app.
+
 If you are not familiar with ROS, take a look a this [tutorials](http://wiki.ros.org/ROS/Tutorials).
 Same goes for rosbridge and this [tutorial](http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge)!
-
 
 #### Front-end
 ```
