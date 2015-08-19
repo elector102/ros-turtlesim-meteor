@@ -1,32 +1,6 @@
 /*
- *		ROS link functions
- */
-
-// Connect with turtle movement topic, in order to push some control vectors
-turtle_cmdVel = new ROSLIB.Topic({
-  ros : ros,
-  name : '/turtle1/cmd_vel',
-  messageType : 'geometry_msgs/Twist'
-});
-
-drawStar = function (){
-  for(var i = 0; i<10; i=i+2){
-    setTimeout(function(){
-      turtle_cmdVel.publish(getControlVector(5.0,0.0));
-    }, i*1000); 
-    setTimeout(function(){
-      turtle_cmdVel.publish(getControlVector(0.0,2.5));
-    }, i*1000 + 1000);
-  }
-};
-
-subscriptionCallback = function (message) {
-  console.log(JSON.stringify(message));
-};
-
-/*
- *		Control Vector functions
- */
+* Control vector functions
+*/
 getControlVector = function (linear, angular) {
   var vector = new ROSLIB.Message({
     linear: {
@@ -42,3 +16,34 @@ getControlVector = function (linear, angular) {
   });
   return vector;
 };
+
+// Example: draw a 5-pointed star
+drawStar = function (){
+  for(var i = 0; i<10; i=i+2){
+    setTimeout(function(){
+      turtle_cmdVel.publish(getControlVector(5.0,0.0));
+    }, i*1000); 
+    setTimeout(function(){
+      turtle_cmdVel.publish(getControlVector(0.0,2.5));
+    }, i*1000 + 1000);
+  }
+};
+
+// TODO: As for now, this is unused
+// clean and reset helpers
+clean = function () {
+  var canvas = document.getElementById("turtle");
+  var ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, 300, 300);
+  cleanSlate.callService({}, function(result) {
+    console.log('clean ok');
+  });
+};
+
+turtlesimReset = function () {
+  resetSlate.callService({}, function(result) {
+    console.log('reset ok');
+  });
+};
+
+
