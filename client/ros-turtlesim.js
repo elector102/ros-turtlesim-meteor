@@ -70,6 +70,7 @@ posE.subscribe(function(message) {
     pos.li = message.linear_velocity;
     pos.av = message.angular_velocity;
   }
+  drawTrutlePath(message);
 });
 
 // Connect with turtle movement topic, in order to push some control vectors
@@ -91,3 +92,30 @@ var drawStar = function (){
 };
 
 drawStar();
+
+var oldX;
+var oldY;
+
+var drawTrutlePath = function (message) {
+  
+  var canvasSize = 300; // 300x300 in html
+  var zoom = canvasSize / 12; // tutle sim is 12x12 in size
+  
+  var x = message.x * zoom;
+  var y = canvasSize - message.y * zoom; // coordinates for y are reversed
+  
+  if (!(x === oldX && y === oldY)) {
+    var c = document.getElementById("turtle");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    if (!oldX && !oldY) {
+      oldX = x;
+      oldY = y;
+    };
+    ctx.moveTo(oldX, oldY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    oldX = x;
+    oldY = y;
+  }
+};
