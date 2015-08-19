@@ -2,8 +2,45 @@
 * Main app controller
 */
 
-// draw a star
-drawStar();
+// read file upload
+window.onload = function() {
+  var fileList = document.getElementById('controlFile');
+  var display = document.getElementById('fileDisplay');
+
+  fileList.addEventListener('change', function(event) {
+    if (fileList.files.length !== 0){
+      var file = fileList.files[0];
+      var textType = /.*/;
+
+      if (file.type.match(textType)) {
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+          fileDisplay.value = reader.result;
+        }
+        reader.readAsText(file);
+      } else {
+        display.value = "File not supported!"
+      }
+    }
+  });
+}
+
+draw = function (){
+  var fileList = document.getElementById('controlFile');
+  var display = document.getElementById('fileDisplay');
+  if (fileList.files.length !== 0){  
+    var json = JSON.parse(display.value);
+    var cList = json.commands;
+    var commands = [];
+
+    for (var i=0; i<cList.length; i++) {
+      var cmd = getControlVector(Number(cList[i].li),Number(cList[i].an));
+      commands.push(cmd);
+    };
+    drawCommandList(commands);
+  }
+};
 
 // reset function
 reset = function (){
@@ -12,4 +49,11 @@ reset = function (){
   ctx.clearRect(0, 0, 300, 300);
   resetPosition();
   turtlesimReset();
-}
+};
+
+clean = function(){
+  var fileList = document.getElementById('controlFile');
+  var display = document.getElementById('fileDisplay');
+  display.value = "";
+  fileList.value = "";
+};

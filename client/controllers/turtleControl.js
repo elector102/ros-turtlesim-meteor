@@ -17,6 +17,19 @@ getControlVector = function (linear, angular) {
   return vector;
 };
 
+// publish a list of commands to turtle_cmdVel
+drawCommandList = function(cList){
+  for(var k = 0; k<cList.length; k++){
+    var elem = cList[k];
+    publishCmd(elem, k*1000);
+  }
+};
+publishCmd = function(cmd, delay){
+  setTimeout(function(){
+    turtle_cmdVel.publish(cmd);
+  }, delay);
+}
+
 // Example: draw a 5-pointed star
 drawStar = function (){
   for(var i = 0; i<10; i=i+2){
@@ -29,21 +42,8 @@ drawStar = function (){
   }
 };
 
-// TODO: As for now, this is unused
-// clean and reset helpers
-clean = function () {
-  var canvas = document.getElementById("turtle");
-  var ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, 300, 300);
-  cleanSlate.callService({}, function(result) {
-    console.log('clean ok');
-  });
-};
-
 turtlesimReset = function () {
-  resetSlate.callService({}, function(result) {
-    console.log('reset ok');
-  });
+  resetSlate.callService({}, function(result) {});
 };
 
 
