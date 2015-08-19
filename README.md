@@ -34,10 +34,39 @@ After meteor launches the app, you can check it out in the browser at:
 http://localhost:3000/
 ```
 
+### Uploading your own examples
+You can upload you own drawings in ***JSON*** format.
+The file consists of an array of instructions that will be executed in series.
+Each command has two properties:
+- `li`: is the linear velocity (draws a line)
+- `an`: is the angular velocity (rotates)
+
+Check out this simple example:
+```json
+{
+  "commands": [
+    {
+      "li": "2.0",
+      "an": "0.0"
+   },
+  {
+      "li": "0.0",
+      "an": "2.0"
+   },
+    {
+      "li": "3.0",
+      "an": "0.0"
+   }
+  ]
+}
+```
+Here we draw a line, then we rotate, and then we draw a longer line.
+Try it out and see what happens!
+
 ### Configuring the roslibjs and rosbridge connection
 The ***url*** and ***port*** of the server to which ***roslibjs*** connects to the ***rosbridge*** can be configured in:
 ```
-public\config.json
+public/config.json
 ```
 ```json
 {
