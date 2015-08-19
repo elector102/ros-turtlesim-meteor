@@ -53,6 +53,7 @@ var posE = new ROSLIB.Topic({
 });
 posE.subscribe(function(message) {
   //console.log(i + ' - Received message on ' + posE.name + ': ' + JSON.stringify(message));
+  drawTrutlePath(message);
   i++;
 });
 //----------------------
@@ -76,4 +77,31 @@ var twist = new ROSLIB.Message({
     z : 0.0
   }
 });
-turtle_cmdVel.publish(twist);
+turtle_cmdVel.publish(twist); // draw turtle path
+
+var oldX;
+var oldY;
+
+var drawTrutlePath = function (message) {
+  
+  var canvasSize = 300; // 300x300 in html
+  var zoom = canvasSize / 12; // tutle sim is 12x12 in size
+  
+  var x = message.x * zoom;
+  var y = canvasSize - message.y * zoom; // coordinates for y are reversed
+  
+  if (!(x === oldX && y === oldY)) {
+    var c = document.getElementById("turtle");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    if (!oldX && !oldY) {
+      oldX = x;
+      oldY = y;
+    };
+    ctx.moveTo(oldX, oldY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    oldX = x;
+    oldY = y;
+  }
+};
