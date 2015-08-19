@@ -33,6 +33,8 @@ After meteor launches the app, you can check it out in the browser at:
 ```
 http://localhost:3000/
 ```
+
+### Configuring the roslibjs and rosbridge connection
 The ***url*** and ***port*** of the server to which ***roslibjs*** connects to the ***rosbridge*** can be configured in:
 ```
 public\config.json
