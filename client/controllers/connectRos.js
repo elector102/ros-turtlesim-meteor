@@ -4,7 +4,8 @@
 
 ros = new ROSLIB.Ros();
 // If there is an error on the backend, an 'error' emit will be emitted.
-ros.on('error', function (error) {
+ros.on('error', function(error) {
+  document.getElementById('turtlesim').style.display = 'none';
   document.getElementById('connecting').style.display = 'none';
   document.getElementById('connected').style.display = 'none';
   document.getElementById('closed').style.display = 'none';
@@ -12,30 +13,23 @@ ros.on('error', function (error) {
   console.log(error);
 });
 // Find out exactly when we made a connection.
-ros.on('connection', function () {
+ros.on('connection', function() {
   console.log('Connection made!');
+  document.getElementById('turtlesim').style.display = 'inline';
   document.getElementById('connecting').style.display = 'none';
   document.getElementById('error').style.display = 'none';
   document.getElementById('closed').style.display = 'none';
   document.getElementById('connected').style.display = 'inline';
 });
-ros.on('close', function () {
+ros.on('close', function() {
   console.log('Connection closed.');
+  document.getElementById('turtlesim').style.display = 'none';
   document.getElementById('connecting').style.display = 'none';
   document.getElementById('connected').style.display = 'none';
   document.getElementById('closed').style.display = 'inline';
 });
 // Create a connection to the rosbridge WebSocket server.
-
-
-var connectionUrl = 'ws://localhost:9090';
-
-$.getJSON('config.json', function (config) {
-  if (config) {
-    connectionUrl = config.connectionUrl;
-  };
-  ros.connect(connectionUrl);  
-});
+ros.connect('ws://localhost:9090');
 
 /*
 * Configure connections to turtlesim Topics & Services
@@ -55,18 +49,9 @@ turtle_pose = new ROSLIB.Topic({
   messageType : 'turtlesim/Pose'
 });
 
-// TODO: As for now, this connection is unused
-// Service connection for cleaning turtlesim background
-cleanSlate = new ROSLIB.Service({
-  ros : ros,
-  name : '/clear',
-    serviceType : 'std_srvs/Empty'
-});
-
 // Service connection for reseting turtlesim
 resetSlate = new ROSLIB.Service({
   ros : ros,
   name : '/reset',
     serviceType : 'std_srvs/Empty'
 });
-
