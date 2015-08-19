@@ -1,5 +1,7 @@
-// Connecting to ROS
-// -----------------
+/*
+* ROS Connection
+*/
+
 ros = new ROSLIB.Ros();
 // If there is an error on the backend, an 'error' emit will be emitted.
 ros.on('error', function (error) {
@@ -25,13 +27,46 @@ ros.on('close', function () {
 });
 // Create a connection to the rosbridge WebSocket server.
 
+
 var connectionUrl = 'ws://localhost:9090';
 
 $.getJSON('config.json', function (config) {
   if (config) {
     connectionUrl = config.connectionUrl;
   };
-  console.log(connectionUrl);
   ros.connect(connectionUrl);  
+});
+
+/*
+* Configure connections to turtlesim Topics & Services
+*/
+
+// Connect with turtle movement topic, in order to push some control vectors
+turtle_cmdVel = new ROSLIB.Topic({
+  ros : ros,
+  name : '/turtle1/cmd_vel',
+  messageType : 'geometry_msgs/Twist'
+});
+
+// Connect with turtle position, in order to draw movements
+turtle_pose = new ROSLIB.Topic({
+  ros : ros,
+  name : '/turtle1/pose',
+  messageType : 'turtlesim/Pose'
+});
+
+// TODO: As for now, this connection is unused
+// Service connection for cleaning turtlesim background
+cleanSlate = new ROSLIB.Service({
+  ros : ros,
+  name : '/clear',
+    serviceType : 'std_srvs/Empty'
+});
+
+// Service connection for reseting turtlesim
+resetSlate = new ROSLIB.Service({
+  ros : ros,
+  name : '/reset',
+    serviceType : 'std_srvs/Empty'
 });
 
