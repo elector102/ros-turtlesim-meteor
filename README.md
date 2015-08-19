@@ -24,6 +24,13 @@ Dependencies for each environment are detailed below, with links for each instal
 - [Meteor](https://www.meteor.com/install)
 
 ### Installing and running the app
+#### Back-end
+Make sure you have ***roscore***, ***turtlesim*** and ***rosbridge*** running in the back-end.
+If you are not familiar with ROS, take a look a this [tutorials](http://wiki.ros.org/ROS/Tutorials).
+Same goes for rosbridge and this [tutorial](http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge)!
+
+
+#### Front-end
 ```
 > git clone https://github.com/luisbosch/ros-turtlesim-meteor.git
 > cd ros-turtlesim-meteor
@@ -77,4 +84,4 @@ The app connects to `ws://localhost:9090` by default.
 
 ## Contributors
 
-This is just a test, feel free to fork and use at your own risk! ***This is repo is not maintained***.
+This is just a test, feel free to fork and use at your own risk! ***This repo is not maintained***.
