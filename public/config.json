@@ -1,3 +1,3 @@
 {
-  "connectionUrl": "ws://192.168.0.104:9090"
+  "connectionUrl": "ws://localhost:9090"
 }
