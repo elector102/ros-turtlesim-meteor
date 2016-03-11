@@ -1,5 +1,6 @@
 var server = require('websocket').server
 var http = require('http');
+var ROSLIB = require('roslib');
 
 // ROS connection
 ros = new ROSLIB.Ros();
@@ -10,12 +11,12 @@ ros.on('error', function(error) {
 
 // websocket
 var socket = new server({
-    httpServer: http.createServer().listen(3000)
+    httpServer: http.createServer().listen(5000)
 });
 
 var connection = null;
 socket.on('request', function(request) {
-    var connection = request.accept(null, request.origin);
+    connection = request.accept(null, request.origin);
 
     connection.on('close', function(connection) {
         console.log('connection closed');
@@ -52,9 +53,8 @@ turtle_pose.subscribe(function(message) {
     pos.t = message.theta;
     pos.li = message.linear_velocity;
     pos.av = message.angular_velocity;
-    console.log(pos)
     if (connection) {
-        connection.sendUTF(pos);
+      connection.sendUTF(JSON.stringify(pos));
     }
   }
 });
