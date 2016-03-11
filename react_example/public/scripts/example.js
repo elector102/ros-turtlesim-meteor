@@ -66,14 +66,14 @@ var TurtleCanvas = React.createClass({
           You can upload your own drawings as JSON files, check out the example below! <br />
           Click on "Draw" to see your creation, or "Reset" to start over.
         <br />
-        <a class="link" href="/star.json" download>download "star" example</a>
+        <a className="link" href="/star.json" download>download "star" example</a>
         <br /><br />
 
         <input type="file" id="controlFile" /><button type="button" onclick="clean()">Clean command file</button>
 
         <br /><br />
 
-        <textarea class="codebox" id="fileDisplay" rows="5" cols="50" value="" disabled>
+        <textarea className="codebox" id="fileDisplay" rows="5" cols="50" value="" disabled>
         </textarea>
 
         <br /><br />
