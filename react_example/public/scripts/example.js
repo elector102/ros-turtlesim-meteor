@@ -84,7 +84,14 @@ var TurtleCanvas = React.createClass({
         <br /><br />
 
         <div>
-          <canvas id="turtle" width="300" height="300" style="border:3px solid #000000;background:#0000ff;">
+          <canvas
+            id="turtle"
+            width="300"
+            height="300"
+            style={{
+              border: '3px solid #000000',
+              background: '#0000ff'
+            }}>
           </canvas>
         </div>
       </div>
@@ -102,14 +109,10 @@ var FileLoader = React.createClass({
 
 var Header = React.createClass({
   render: function() {
+    let status = this.props.connected ? 'Connected' : 'Disconnected'
     return (
       <div id="statusIndicator">
-        { this.props.conn &&
-          <p>rosbridge status: Connected</p>
-        }
-        { !this.props.conn &&
-          <p>rosbridge status: Disconnected</p>
-        }
+          <p>rosbridge status: {status}</p>
       </div>
     );
   }
@@ -174,14 +177,11 @@ var TurtleSim = React.createClass({
   render: function() {
     return (
       <div className="turtleSim">
-
-        { this.state.connected &&
-          <div>
-            <Header />
-            <FileLoader renderFile={this.renderFromFile} />
-            <TurtleCanvas posTopic={this.state.turtle_pose} />
-          </div>
-        }
+        <div>
+          <Header connected={this.state.connected} />
+          <FileLoader renderFile={this.renderFromFile} />
+          <TurtleCanvas posTopic={this.state.turtle_pose} />
+        </div>
       </div>
     );
   }
