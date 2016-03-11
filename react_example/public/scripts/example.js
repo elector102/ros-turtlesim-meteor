@@ -1,10 +1,8 @@
-
-
 var TurtleCanvas = React.createClass({
   getInitialState: function() {
     return {
       pos: {
-        x : 0, 
+        x : 0,
         y : 0,
         z : 0,
         li: 0,
@@ -37,7 +35,7 @@ var TurtleCanvas = React.createClass({
     });
   },
 
-  drawTrutlePath = function () {
+  drawTrutlePath: function() {
     let message = this.state.pos;
     let oldX = this.state.oldX;
     let oldY = this.state.oldY;
@@ -46,7 +44,7 @@ var TurtleCanvas = React.createClass({
     var zoom = canvasSize / 12; // tutle sim is 12x12 in size
     var x = message.x * zoom;
     var y = canvasSize - message.y * zoom; // coordinates for y are reversed
-    
+
     var c = document.getElementById("turtle");
     var ctx = c.getContext("2d");
     ctx.beginPath();
@@ -60,7 +58,7 @@ var TurtleCanvas = React.createClass({
     this.setState({oldY: y});
     ctx.stroke();
   },
-  
+
   render: function() {
     return (
       <div id="turtlesim">
@@ -79,7 +77,7 @@ var TurtleCanvas = React.createClass({
         </textarea>
 
         <br /><br />
-        
+
         <button type="button" onclick="reset()">Reset</button>
         <button type="button" onclick="draw()">Draw</button>
 
@@ -93,7 +91,6 @@ var TurtleCanvas = React.createClass({
     );
   }
 });
-
 
 var FileLoader = React.createClass({
   render: function() {
@@ -125,23 +122,24 @@ var TurtleSim = React.createClass({
 
   getInitialState: function() {
     return {
-      connected: false,
+      connected: false
     };
   },
 
   subscribeToROS: function() {
     // ROS connection
     var connectionUrl = 'ws://localhost:9090';
-    ros = new ROSLIB.Ros();
-    ros.connect(connectionUrl);  
-    
-    ros.on('error', function(error) {
+    var ros = new ROSLIB.Ros({
+      url: connectionUrl
+    });
+
+    ros.on('error', () => {
       this.setState({connected: false})
     });
-    ros.on('connection', function() {
+    ros.on('connection', () => {
       this.setState({connected: true})
     });
-    ros.on('close', function() {
+    ros.on('close', () => {
       this.setState({connected: false})
     });
 
@@ -170,13 +168,13 @@ var TurtleSim = React.createClass({
       cmdVel: turtle_cmdVel,
       pose: turtle_pose,
       reset: resetSlate,
-    });   
+    });
   },
 
   render: function() {
     return (
       <div className="turtleSim">
-        <StatusIndicator conn={this.state.connected} />
+
         { this.state.connected &&
           <div>
             <Header />
@@ -190,5 +188,5 @@ var TurtleSim = React.createClass({
 });
 
 ReactDOM.render(
-  <TurtleSim />
+  <TurtleSim />, document.getElementById('content')
 );
